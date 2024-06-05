@@ -32,7 +32,7 @@ A simple yet powerful digital bullet journal app to track your daily thoughts, m
 
 ### Prerequisites
 
-- [.NET SDK]([https://dotnet.microsoft.com/download](https://dotnet.microsoft.com/download))
+- [.NET SDK](https://dotnet.microsoft.com/download)
 - [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/)
 - [SQLite](https://www.sqlite.org/index.html)
 
