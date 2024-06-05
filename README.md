@@ -22,25 +22,26 @@ A simple yet powerful digital bullet journal app to track your daily thoughts, m
 - **Filtering and Sorting:** Easily find entries by date or mood.
 - **Editing and Deleting:** Update or remove entries as needed.
 
-(Add more features as you implement them)
+(More features on the way...)
 
 ## Demo
 
-(Optional) Include screenshots or a GIF showcasing your app's functionality.
+(Will be added once a MVP is ready)
 
 ## Getting Started
 
 ### Prerequisites
 
 - [.NET SDK]([https://dotnet.microsoft.com/download](https://dotnet.microsoft.com/download))
-- (Any other tools or libraries required)
+- [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/)
+- [SQLite](https://www.sqlite.org/index.html)
 
 ### Installation
 
 1. Clone the repository:
 
    ```bash
-   git clone [invalid URL removed]
+   git clone [project-url]
    ```
 
 2. Navigate to the project directory:
@@ -52,26 +53,24 @@ A simple yet powerful digital bullet journal app to track your daily thoughts, m
 3. Install dependencies: (adjust the file name if different)
 
    ```bash
-   dotnet restore backend/DigitalBulletJournal.csproj
-   dotnet restore frontend/DigitalBulletJournal.csproj
+   dotnet restore Bala.BulletJournal/Bala.BulletJournal.csproj
    ```
 
 4. Update Database:
 
    ```bash
-   dotnet ef database update --project backend/DigitalBulletJournal.csproj
+   dotnet ef database update --project Bala.BulletJournal/Bala.BulletJournal.csproj
    ```
 
 5. Run the app:
 
    ```bash
-   dotnet run --project backend/DigitalBulletJournal.csproj
-   dotnet run --project frontend/DigitalBulletJournal.csproj
+   dotnet run --project Bala.BulletJournal/Bala.BulletJournal.csproj
    ```
 
 ## Usage
 
-(Provide instructions on how to use the app's features)
+(Instructions will be added once a MVP is ready)
 
 ## Contributing
 
@@ -80,3 +79,9 @@ Contributions are welcome! Please read the [CONTRIBUTING.md](CONTRIBUTING.md) fi
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Progress
+
+✅ = Completed, 🚧 = In Progress, ❌ = Not Started
+
+- ✅ Create Models, DbContext and Seed Data
