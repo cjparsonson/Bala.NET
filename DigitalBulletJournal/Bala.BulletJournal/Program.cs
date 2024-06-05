@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore; // DbContext, DbSet<T>
 using Bala.Shared; // JournalEntry
+using Bala.Console; // JournalEntryManager
+
 
 using (JournalDbContext db = new())
 {
@@ -16,6 +18,9 @@ using (JournalDbContext db = new())
     {
         WriteLine($"Journal entry: {entry.Date:d} {entry.Rating} {entry.Comment}");
     }
+
+    JournalEntryManager manager = new(db);
+    manager.AddEntry();
 }
 
 
