@@ -69,9 +69,23 @@ public class JournalEntryManager
 
     public void ListEntries()
     {
-        foreach (JournalEntry entry in _db.JournalEntries)
+        var entries = _db.JournalEntries;
+
+        // Hand empty case
+        if (!entries.Any())
         {
-            WriteLine($"Journal entry: {entry.Date:d}\n{entry.Rating}\n{entry.Comment}\n");
+            WriteLine("No entries found.");
+            return;
+        }
+
+        // Display all entries
+        WriteLine("Your Journal entries:");
+        foreach (JournalEntry entry in entries)
+        {
+            WriteLine("----------------------------------");
+            WriteLine($"Date: {entry.Date:d}");
+            WriteLine($"Rating: {entry.Rating}");
+            WriteLine($"Comment: {entry.Comment}");
         }
     }
 }
