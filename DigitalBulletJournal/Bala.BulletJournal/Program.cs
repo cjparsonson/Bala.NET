@@ -39,10 +39,7 @@ using (JournalDbContext db = new()) // Ensure the database is created
                 menuLoop = false;
                 break;
             case "L":
-                foreach (JournalEntry entry in db.JournalEntries)
-                {
-                    WriteLine($"Journal entry: {entry.Date:d} {entry.Rating} {entry.Comment}");
-                }
+                manager.ListEntries();
                 break;
             default:
                 WriteLine("Invalid choice. Please try again.");

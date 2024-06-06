@@ -66,4 +66,12 @@ public class JournalEntryManager
         WriteLine("Entry added successfully.");
 
     }
+
+    public void ListEntries()
+    {
+        foreach (JournalEntry entry in _db.JournalEntries)
+        {
+            WriteLine($"Journal entry: {entry.Date:d}\n{entry.Rating}\n{entry.Comment}\n");
+        }
+    }
 }
