@@ -16,31 +16,54 @@ public class JournalEntryManager
     // Methods
     public void AddEntry()
     {
-        WriteLine("Enter the date for the entry (dd-mm-yyyy), or press enter for today: ");
         DateTime date;
-        ConsoleKey key = ReadKey().Key;
-        if (key == ConsoleKey.Enter)
-        {
-            date = DateTime.Now;
-        }
-        else
-        {
-            while (!DateTime.TryParse(ReadLine(), out date))
-            {
-                WriteLine("Invalid date. Please try again.");
-            }
-        }
-        
-        WriteLine("Enter your rating for the day (1-5, with 1 being bad), or press enter for 3: ");
         int rating;
-        while (!int.TryParse(ReadLine(), out rating) || rating < 1 || rating > 5)
+        string comment;
+
+        do
         {
-            WriteLine("Invalid rating. Please try again.");
-        }
+            WriteLine("Enter the date for the entry (dd-mm-yyyy), or press enter for today: ");
+            ConsoleKey key = ReadKey().Key;
+            if (key == ConsoleKey.Enter)
+            {
+                date = DateTime.Now;
+            }
+            else
+            {
+                while (!DateTime.TryParse(ReadLine(), out date))
+                {
+                    WriteLine("Invalid date. Please try again.");
+                }
+            }
 
-        WriteLine("Enter your comment for the day (200 characters or less), press enter to leave blank: ");
-        string comment = ReadLine() ?? string.Empty;
+            WriteLine("Enter your rating for the day (1-5, with 1 being bad), or press enter for 3: ");
+            while (!int.TryParse(ReadLine(), out rating) || rating < 1 || rating > 5)
+            {
+                WriteLine("Invalid rating. Please try again.");
+            }
 
-        
+            WriteLine("Enter your comment for the day (200 characters or less), press enter to leave blank: ");
+            comment = ReadLine() ?? string.Empty;
+
+            WriteLine("You entered the following information:");
+            WriteLine("Date: {0}\nRating: {1}\nComment: {2}\n", date, rating, comment);
+            WriteLine("Is this correct? (Y/N)");
+
+        } while (ReadLine()?.ToUpper() != "Y");
+
+        var newEntry = new JournalEntry
+        {
+            Date = date,
+            Rating = rating,
+            Comment = comment
+        };
+
+
+
+        _db.JournalEntries.Add(newEntry);
+        _db.SaveChanges();
+
+        WriteLine("Entry added successfully.");
+
     }
 }
