@@ -24,6 +24,7 @@ using (JournalDbContext db = new()) // Ensure the database is created
         WriteLine("Choose an option:");
         WriteLine("A - Add a journal entry");
         WriteLine("L - List journal entries");
+        WriteLine("E - Edit a journal entry");
         // Add more options here
         WriteLine("Q - Quit");
 
@@ -40,6 +41,11 @@ using (JournalDbContext db = new()) // Ensure the database is created
                 break;
             case "L":
                 manager.ListEntries();
+                break;
+            case "E":
+                WriteLine("Enter the ID of the entry you want to edit: ");
+                int id = int.TryParse(ReadLine(), out id) ? id : -1;
+                manager.EditEntry(id);
                 break;
             default:
                 WriteLine("Invalid choice. Please try again.");

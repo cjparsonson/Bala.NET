@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection.Metadata.Ecma335;
 using Bala.Shared; // JournalDbContext, JournalEntry
 
 namespace Bala.Console;
@@ -79,13 +80,83 @@ public class JournalEntryManager
         }
 
         // Display all entries
+        // TODO - Add paging and a helper method to display entries
         WriteLine("Your Journal entries:");
         foreach (JournalEntry entry in entries)
         {
-            WriteLine("----------------------------------");
+            WriteLine(string.Concat(Enumerable.Repeat("-", 50)));
+            WriteLine($"ID: {entry.Id}");
             WriteLine($"Date: {entry.Date:d}");
             WriteLine($"Rating: {entry.Rating}");
-            WriteLine($"Comment: {entry.Comment}");
+            WriteLine($"Comment: {entry.Comment}");            
+        }
+        WriteLine(); // Add a blank line
+    }
+
+    public void EditEntry(int Id)
+    {
+        var entry = _db.JournalEntries.Find(Id);
+        if (entry == null)
+        {
+            WriteLine("Entry not found.");
+            return;
+        }
+
+        // Display the entry
+        WriteLine("Current entry:");
+        WriteLine(string.Concat(Enumerable.Repeat("-", 50)));
+        WriteLine($"ID: {entry.Id}");
+        WriteLine($"Date: {entry.Date:d}");
+        WriteLine($"Rating: {entry.Rating}");
+        WriteLine($"Comment: {entry.Comment}");
+
+        // Ask user if they want to edit
+        WriteLine("Do you want to edit this entry? (Y/N)");
+        if (ReadLine()?.ToUpper() != "Y")
+        {
+            return;
+        }
+        else
+        {
+            // New values
+            DateTime newDate;
+            int newRating;
+            
+            // Ask for new values one by one
+            WriteLine("Enter the new date for the entry (dd-mm-yyyy), or press enter to skip: ");
+            string? inputDate = ReadLine();
+            if (!string.IsNullOrEmpty(inputDate))
+            {
+                while (!DateTime.TryParse(inputDate, out newDate))
+                {
+                    WriteLine("Invalid date. Please try again.");
+                }
+                entry.Date = newDate;
+            }
+
+            WriteLine("Enter the new rating for the day (1-5, with 1 being bad), or press enter to skip: ");
+            string? inputRating = ReadLine();
+            if (!string.IsNullOrEmpty(inputRating))
+            {
+                while (!int.TryParse(inputRating, out newRating) || newRating < 1 || newRating > 5)
+                {
+                    WriteLine("Invalid rating. Please try again.");
+                }
+                entry.Rating = newRating;
+            }
+
+            WriteLine("Enter the new comment for the day (200 characters or less), press enter to skip: ");
+            string? newComment = ReadLine();
+            if (!string.IsNullOrEmpty(newComment))
+            {
+                entry.Comment = newComment;
+            }
+
+            // Save changes
+            _db.SaveChanges();
+
+            WriteLine("Entry updated successfully.");
         }
     }
 }
+
