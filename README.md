@@ -85,3 +85,10 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ✅ = Completed, 🚧 = In Progress, ❌ = Not Started
 
 - ✅ Create Models, DbContext and Seed Data
+- ✅ Create JournalEntryManager class
+-- ✅ Add AddEntry method
+-- ✅ Add ListEntry method
+-- ✅ Add EditEntry method
+-- 🚧 Add DeleteEntry method
+
+- ❌ Create Unit Tests for JournalEntryManager
