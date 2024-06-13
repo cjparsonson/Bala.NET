@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection.Metadata.Ecma335;
-using Bala.Shared; // JournalDbContext, JournalEntry
+﻿using Bala.Shared; // JournalDbContext, JournalEntry, JournalEntryValidationExtensions
 
 namespace Bala.Console;
 
@@ -59,7 +57,11 @@ public class JournalEntryManager
             Comment = comment
         };
 
-
+        if (!newEntry.IsValidDate())
+        {
+            WriteLine($"You cannot choose a future date: {newEntry.Date} . Please try again.");
+            return;
+        }
 
         _db.JournalEntries.Add(newEntry);
         _db.SaveChanges();
@@ -88,7 +90,7 @@ public class JournalEntryManager
             WriteLine($"ID: {entry.Id}");
             WriteLine($"Date: {entry.Date:d}");
             WriteLine($"Rating: {entry.Rating}");
-            WriteLine($"Comment: {entry.Comment}");            
+            WriteLine($"Comment: {entry.Comment}");
         }
         WriteLine(); // Add a blank line
     }
@@ -121,7 +123,7 @@ public class JournalEntryManager
             // New values
             DateTime newDate;
             int newRating;
-            
+
             // Ask for new values one by one
             WriteLine("Enter the new date for the entry (dd-mm-yyyy), or press enter to skip: ");
             string? inputDate = ReadLine();
@@ -156,6 +158,38 @@ public class JournalEntryManager
             _db.SaveChanges();
 
             WriteLine("Entry updated successfully.");
+        }
+    }
+
+    public void DeleteEntry(int Id)
+    {
+        var entry = _db.JournalEntries.Find(Id);
+        if (entry == null)
+        {
+            WriteLine("Entry not found.");
+            return;
+        }
+
+        // Display the entry
+        WriteLine("Current entry:");
+        WriteLine(string.Concat(Enumerable.Repeat("-", 50)));
+        WriteLine($"ID: {entry.Id}");
+        WriteLine($"Date: {entry.Date:d}");
+        WriteLine($"Rating: {entry.Rating}");
+        WriteLine($"Comment: {entry.Comment}");
+
+        // Ask user if they want to delete
+        WriteLine("Do you want to delete this entry? (Y/N)");
+        if (ReadLine()?.ToUpper() != "Y")
+        {
+            return;
+        }
+        else
+        {
+            _db.JournalEntries.Remove(entry);
+            _db.SaveChanges();
+
+            WriteLine("Entry deleted successfully.");
         }
     }
 }

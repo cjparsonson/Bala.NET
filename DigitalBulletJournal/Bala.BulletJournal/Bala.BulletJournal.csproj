@@ -10,6 +10,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Bala.EntityModels.Sqlite\Bala.EntityModels.Sqlite.csproj" />
 		<ProjectReference Include="..\Bala.DataContext.Sqlite\Bala.DataContext.Sqlite.csproj" />
+		<ProjectReference Include="..\Bala.HelperMethods\Bala.HelperMethods.csproj" />
 		<Using Include="System.Console" Static="true" />
 	</ItemGroup>
 

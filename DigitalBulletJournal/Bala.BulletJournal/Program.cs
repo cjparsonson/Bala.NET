@@ -25,7 +25,7 @@ using (JournalDbContext db = new()) // Ensure the database is created
         WriteLine("A - Add a journal entry");
         WriteLine("L - List journal entries");
         WriteLine("E - Edit a journal entry");
-        // Add more options here
+        WriteLine("D - Delete a journal entry");
         WriteLine("Q - Quit");
 
         string choice = ReadLine()?.ToUpper() ?? string.Empty; // Read user input
@@ -46,6 +46,11 @@ using (JournalDbContext db = new()) // Ensure the database is created
                 WriteLine("Enter the ID of the entry you want to edit: ");
                 int id = int.TryParse(ReadLine(), out id) ? id : -1;
                 manager.EditEntry(id);
+                break;
+            case "D":
+                WriteLine("Enter the ID of the entry you want to delete: ");
+                id = int.TryParse(ReadLine(), out id) ? id : -1;
+                manager.DeleteEntry(id);
                 break;
             default:
                 WriteLine("Invalid choice. Please try again.");
