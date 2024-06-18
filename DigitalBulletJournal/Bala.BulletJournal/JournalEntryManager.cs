@@ -45,7 +45,7 @@ public class JournalEntryManager
             comment = ReadLine() ?? string.Empty;
 
             WriteLine("You entered the following information:");
-            WriteLine("Date: {0}\nRating: {1}\nComment: {2}\n", date, rating, comment);
+            WriteLine("Date: {0:dd-MM-yyyy}\nRating: {1}\nComment: {2}\n", date, rating, comment);
             WriteLine("Is this correct? (Y/N)");
 
         } while (ReadLine()?.ToUpper() != "Y");
@@ -125,11 +125,15 @@ public class JournalEntryManager
             int newRating;
 
             // Ask for new values one by one
-            WriteLine("Enter the new date for the entry (dd-mm-yyyy), or press enter to skip: ");
-            string? inputDate = ReadLine();
-            if (!string.IsNullOrEmpty(inputDate))
+            WriteLine("Enter the date for the entry (dd-mm-yyyy), or press enter for today: ");
+            ConsoleKey key = ReadKey().Key;
+            if (key == ConsoleKey.Enter)
             {
-                while (!DateTime.TryParse(inputDate, out newDate))
+                newDate = DateTime.Now;
+            }
+            else
+            {
+                while (!DateTime.TryParse(ReadLine(), out newDate))
                 {
                     WriteLine("Invalid date. Please try again.");
                 }
@@ -154,6 +158,12 @@ public class JournalEntryManager
                 entry.Comment = newComment;
             }
 
+            // Validate
+            if (!entry.IsValidDate())
+            {
+                WriteLine($"You cannot choose a future date: {entry.Date:d} . Please try again.");
+                return;
+            }
             // Save changes
             _db.SaveChanges();
 
