@@ -19,6 +19,11 @@ public static class JournalDbContextExtensions
     {
         string path = Path.Combine(relativePath, databaseName);
         path = Path.GetFullPath(path);
+
+        if (!File.Exists(path))
+        {
+            File.Create(path).Dispose();
+        }
         
         services.AddDbContext<JournalDbContext>(options =>
         {
@@ -32,11 +37,7 @@ public static class JournalDbContextExtensions
             var db = scope.ServiceProvider.GetRequiredService<JournalDbContext>();
             db.Database.EnsureCreated();
         }
-
-        if (!File.Exists(path))
-        {
-            throw new FileNotFoundException("Could not find the database file.", path);
-        }
+             
 
         return services;
     }

@@ -4,6 +4,7 @@ using Bala.Console; // JournalEntryManager
 
 var optionsBuilder = new DbContextOptionsBuilder<JournalDbContext>();
 string path = Path.Combine("..", "Journal.db");
+path = Path.GetFullPath(path);
 optionsBuilder.UseSqlite($"Filename={path}");
 var options = optionsBuilder.Options;
 
