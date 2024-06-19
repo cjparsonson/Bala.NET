@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bala.BulletJournal", "Bala.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bala.HelperMethods", "Bala.HelperMethods\Bala.HelperMethods.csproj", "{70BA7B5C-5EEA-4FB4-88DA-2588D106004E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bala.Blazor", "Bala.Blazor\Bala.Blazor\Bala.Blazor.csproj", "{29FA6A91-EF84-45FB-88DF-2ADCC09BB1A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bala.Blazor", "Bala.Blazor\Bala.Blazor\Bala.Blazor.csproj", "{29FA6A91-EF84-45FB-88DF-2ADCC09BB1A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bala.Blazor.Client", "Bala.Blazor\Bala.Blazor.Client\Bala.Blazor.Client.csproj", "{3C480C6D-B1D2-4D9E-B112-FEBFEBEBB306}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bala.Blazor.Client", "Bala.Blazor\Bala.Blazor.Client\Bala.Blazor.Client.csproj", "{3C480C6D-B1D2-4D9E-B112-FEBFEBEBB306}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

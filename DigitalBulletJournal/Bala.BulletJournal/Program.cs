@@ -2,8 +2,13 @@
 using Bala.Shared; // JournalEntry
 using Bala.Console; // JournalEntryManager
 
+var optionsBuilder = new DbContextOptionsBuilder<JournalDbContext>();
+string path = Path.Combine("..", "Journal.db");
+optionsBuilder.UseSqlite($"Filename={path}");
+var options = optionsBuilder.Options;
 
-using (JournalDbContext db = new()) // Ensure the database is created
+
+using (JournalDbContext db = new JournalDbContext(options)) // Ensure the database is created
 {
     bool deleted = await db.Database.EnsureDeletedAsync();
     WriteLine($"Database deleted: {deleted}");

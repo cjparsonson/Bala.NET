@@ -1,4 +1,4 @@
-using Bala.Blazor.Client.Pages;
+using Bala.Shared;
 using Bala.Blazor.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
+builder.Services.AddJournalDbContext();
 
 var app = builder.Build();
 

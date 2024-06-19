@@ -2,9 +2,14 @@
 
 namespace Bala.Shared;
 
-public class JournalDbContext : DbContext
+public partial class JournalDbContext : DbContext
 {
     public DbSet<JournalEntry> JournalEntries { get; set; }
+
+    public JournalDbContext(DbContextOptions<JournalDbContext> options)
+        : base(options)
+    {
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
