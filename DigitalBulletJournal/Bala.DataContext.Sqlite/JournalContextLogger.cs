@@ -6,7 +6,7 @@ public class JournalContextLogger
 {
     public static void WriteLine(string message)
     {
-        string dateTimeStamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        string dateTimeStamp = DateTime.Now.ToString("yyyy-MM-dd-HH:mm:ss");
 
         string path = Path.Combine(GetFolderPath(
             SpecialFolder.DesktopDirectory),

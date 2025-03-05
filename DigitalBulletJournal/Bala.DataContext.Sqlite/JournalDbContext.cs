@@ -19,7 +19,7 @@ public partial class JournalDbContext : DbContext
     {
         string path = Path.Combine(Environment.CurrentDirectory, "Journal.db");
         string connectionString = $"Filename={path}";
-        JournalContextLogger.WriteLine($"Database at: {connectionString}");
+        //JournalContextLogger.WriteLine($"Database at: {connectionString}");
         optionsBuilder.UseSqlite(connectionString);
     }
 
@@ -35,14 +35,14 @@ public partial class JournalDbContext : DbContext
             new JournalEntry
             {
                 Id = 1,
-                Date = DateTime.Now,
+                Date = new DateTime(2025, 3, 5, 12, 0, 0), // Fixed for migration
                 Rating = 5,
                 Comment = "Hello World! This is my first journal entry!"
             },
             new JournalEntry
             {
                 Id = 2,
-                Date = DateTime.Now.AddDays(-1),
+                Date = new DateTime(2025, 3, 4, 12, 0, 0), // Fixed for migration
                 Rating = 4,
                 Comment = "This is my second journal entry! Yesterday was great."
             }
