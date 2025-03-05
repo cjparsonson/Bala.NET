@@ -14,17 +14,19 @@ public static class JournalDbContextExtensions
     /// <returns>An IServiceCollection that can be used to add more services.</returns>
     public static IServiceCollection AddJournalDbContext(
         this IServiceCollection services,
-        string relativePath = "..",
+        string relativePath = ".",
         string databaseName = "Journal.db")
     {
         string path = Path.Combine(relativePath, databaseName);
         path = Path.GetFullPath(path);
 
-        if (!File.Exists(path))
+        // Ensure directory exists
+        string? directory = Path.GetDirectoryName(path);
+        if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
         {
-            File.Create(path).Dispose();
+            Directory.CreateDirectory(directory);
         }
-        
+
         services.AddDbContext<JournalDbContext>(options =>
         {
             options.UseSqlite($"Filename={path}");
@@ -32,12 +34,7 @@ public static class JournalDbContextExtensions
         contextLifetime: ServiceLifetime.Transient,
         optionsLifetime: ServiceLifetime.Transient);
 
-        using (var scope = services.BuildServiceProvider().CreateScope())
-        {
-            var db = scope.ServiceProvider.GetRequiredService<JournalDbContext>();
-            db.Database.EnsureCreated();
-        }
-             
+
 
         return services;
     }

@@ -4,23 +4,23 @@ namespace Bala.Shared;
 
 public partial class JournalDbContext : DbContext
 {
-    public DbSet<JournalEntry> JournalEntries { get; set; }
+    public JournalDbContext()
+    {
+    }
 
     public JournalDbContext(DbContextOptions<JournalDbContext> options)
         : base(options)
     {
     }
 
+    public DbSet<JournalEntry> JournalEntries { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        string path = Path.Combine(
-           Environment.CurrentDirectory, "Journal.db");
-
-        string connection = $"Filename={path}";
-
-        WriteLine($"Connection string: {connection}");
-
-        optionsBuilder.UseSqlite(connection);
+        string path = Path.Combine(Environment.CurrentDirectory, "Journal.db");
+        string connectionString = $"Filename={path}";
+        JournalContextLogger.WriteLine($"Database at: {connectionString}");
+        optionsBuilder.UseSqlite(connectionString);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
