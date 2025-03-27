@@ -1,0 +1,5 @@
+dbug: 27/03/2025 21:36:23.663 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT "j"."Id", "j"."Comment", "j"."Date", "j"."Rating"
+      FROM "JournalEntries" AS "j"
+      ORDER BY "j"."Date" DESC

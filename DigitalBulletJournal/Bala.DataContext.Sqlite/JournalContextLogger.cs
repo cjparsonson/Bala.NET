@@ -6,12 +6,10 @@ public class JournalContextLogger
 {
     public static void WriteLine(string message)
     {
-        string dateTimeStamp = DateTime.Now.ToString("yyyy-MM-dd-HH:mm:ss");
+        string dateTimeStamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
 
-        string path = Path.Combine(GetFolderPath(
-            SpecialFolder.DesktopDirectory),
-            $"BalaLog-{dateTimeStamp}.txt");
-
+        string path = Path.Combine("..", $"BalaLog-{dateTimeStamp}.txt");
+        path = Path.GetFullPath(path);
         StreamWriter textFile = File.AppendText(path);
         textFile.WriteLine(message);
         textFile.Close();

@@ -17,10 +17,20 @@ public partial class JournalDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        string path = Path.Combine(Environment.CurrentDirectory, "Journal.db");
-        string connectionString = $"Filename={path}";
-        //JournalContextLogger.WriteLine($"Database at: {connectionString}");
-        optionsBuilder.UseSqlite(connectionString);
+        string path = String.Empty;
+
+        string database = "Journal.db";
+        path = Path.Combine("..", database);
+        path = Path.GetFullPath(path);
+        JournalContextLogger.WriteLine($"Database path: {path}");
+
+        if (!File.Exists(path))
+        {
+            JournalContextLogger.WriteLine("Database does not exist.");
+        }
+        optionsBuilder.UseSqlite($"Data Source={path}");
+        optionsBuilder.LogTo(JournalContextLogger.WriteLine,
+            new[] { Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.CommandExecuting });
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

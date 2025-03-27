@@ -1,0 +1,39 @@
+﻿@page "/entries"
+@inject JournalDbContext _db
+
+@code {
+    public IEnumerable<JournalEntry>? JournalEntries { get; set; }
+
+    protected override void OnInitialized()
+    {
+        JournalEntries = _db.JournalEntries
+            .OrderByDescending(e => e.Date);
+
+    }
+}
+
+<div class="row">
+    <h1 class="display-2">Journal Entries</h1>
+    <table class="table">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Date</th>
+                <th>Rating</th>
+                <th>Comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (JournalEntries is not null)
+            {
+                @foreach (var entry in JournalEntries)
+                {
+                    <tr>
+                        <td>@entry.Date</td>
+                        <td>@entry.Rating</td>
+                        <td>@entry.Comment</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

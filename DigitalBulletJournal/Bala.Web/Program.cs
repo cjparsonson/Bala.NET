@@ -1,8 +1,10 @@
 using Bala.Web.Components;
+using Bala.Shared;
 
 #region Configue the web server host and services
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents();
+builder.Services.AddJournalDbContext();
 var app = builder.Build();
 #endregion
 
