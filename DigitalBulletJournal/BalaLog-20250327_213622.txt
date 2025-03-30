@@ -1,1 +1,0 @@
-Database path: C:\Users\cjpar\Source\Repos\cjparsonson\Bala.NET\DigitalBulletJournal\Journal.db

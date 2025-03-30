@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Bala.EntityModels.Sqlite;
 
-namespace Bala.Shared;
+namespace Bala.DataContext.Sqlite;
 
 public partial class JournalDbContext : DbContext
 {

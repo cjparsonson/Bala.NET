@@ -1,9 +1,11 @@
-﻿using Bala.Shared;
+﻿using Bala.EntityModels.Sqlite;
+using Bala.DataContext.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Bala.Services
 {
-    public class JournalService
+    public class JournalService : IJournalService
     {
         private readonly JournalDbContext _db;
         public JournalService(JournalDbContext db)
@@ -14,6 +16,11 @@ namespace Bala.Services
         public async Task<List<JournalEntry>> GetJournalEntriesAsync()
         {
             return await _db.JournalEntries.ToListAsync();
+        }
+
+        public async Task<JournalEntry?> GetJournalEntryByIdAsync(int id)
+        {
+            return await _db.JournalEntries.FindAsync(id);
         }
 
         public async Task AddJournalEntryAsync(JournalEntry entry)

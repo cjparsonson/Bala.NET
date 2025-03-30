@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Bala.Shared;
+namespace Bala.DataContext.Sqlite;
 
 public static class JournalDbContextExtensions
 {
@@ -14,7 +14,7 @@ public static class JournalDbContextExtensions
     /// <returns>An IServiceCollection that can be used to add more services.</returns>
     public static IServiceCollection AddJournalDbContext(
         this IServiceCollection services,
-        string relativePath = ".",
+        string relativePath = "..",
         string databaseName = "Journal.db")
     {
         string path = Path.Combine(relativePath, databaseName);

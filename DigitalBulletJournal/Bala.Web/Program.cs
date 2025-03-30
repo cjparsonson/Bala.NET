@@ -1,10 +1,13 @@
 using Bala.Web.Components;
-using Bala.Shared;
+using Bala.DataContext.Sqlite;
+using Bala.Services;
 
 #region Configue the web server host and services
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents();
 builder.Services.AddJournalDbContext();
+// Register the JournalService with its interface
+builder.Services.AddScoped<IJournalService, JournalService>();
 var app = builder.Build();
 #endregion
 

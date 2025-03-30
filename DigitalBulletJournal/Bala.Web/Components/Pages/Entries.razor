@@ -1,14 +1,12 @@
 ﻿@page "/entries"
-@inject JournalDbContext _db
+@inject IJournalService _journalService
 
 @code {
     public IEnumerable<JournalEntry>? JournalEntries { get; set; }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        JournalEntries = _db.JournalEntries
-            .OrderByDescending(e => e.Date);
-
+        JournalEntries = await _journalService.GetJournalEntriesAsync();
     }
 }
 
@@ -31,6 +29,10 @@
                         <td>@entry.Date</td>
                         <td>@entry.Rating</td>
                         <td>@entry.Comment</td>
+                        <td>
+                            <a class="btn btn-primary" href="editentry/@entry.Id.ToString()">Edit</a>
+                            <button class="btn btn-danger">Delete</button>
+                        </td>
                     </tr>
                 }
             }

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Bala.Shared;
+namespace Bala.EntityModels.Sqlite;
 
 public class JournalEntry
 {
@@ -9,14 +9,14 @@ public class JournalEntry
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
-    [Required]
+    [Required(ErrorMessage = "Date is Required.")]
     public DateTime Date { get; set; } = DateTime.Now; // Default value
 
     [Required]
-    [StringLength(200)]
+    [StringLength(200, ErrorMessage = "Comment is Required.")]
     public string? Comment { get; set; } = string.Empty; // Default value
 
     [Required]
-    [Range(1, 5)]
+    [Range(1, 5, ErrorMessage = "Rating is Required.")]
     public int? Rating { get; set; } = 3; // Default value
 }

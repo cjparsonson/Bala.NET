@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Bala.DataContext.Sqlite\Bala.DataContext.Sqlite.csproj" />
+    <ProjectReference Include="..\Bala.Services\Bala.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

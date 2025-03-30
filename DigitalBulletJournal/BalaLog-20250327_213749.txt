@@ -1,6 +1,0 @@
-Database path: C:\Users\cjpar\Source\Repos\cjparsonson\Bala.NET\DigitalBulletJournal\Journal.db
-dbug: 27/03/2025 21:37:49.465 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
-      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
-      SELECT "j"."Id", "j"."Comment", "j"."Date", "j"."Rating"
-      FROM "JournalEntries" AS "j"
-      ORDER BY "j"."Date" DESC

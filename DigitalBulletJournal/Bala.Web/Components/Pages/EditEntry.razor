@@ -1,0 +1,28 @@
+﻿@page "/editentry/{entryid:int}"
+@inject IJournalService _journalService
+@inject NavigationManager Navigation
+
+<h3>Edit Entry</h3>
+<EntryDetail 
+journalEntry="@journalentry"
+             OnValidSubmit="@UpdateEntry" />
+
+@code {
+    [Parameter]
+    public int EntryId { get; set; }
+    public JournalEntry? journalentry;
+    protected override async Task OnParametersSetAsync()
+    {
+        journalentry = await _journalService.GetJournalEntryByIdAsync(EntryId);
+    }
+    private async Task UpdateEntry()
+    {
+        Console.WriteLine("Update Called!");
+        if (journalentry is not null)
+        {
+            await _journalService.EditJournalEntryAsync(journalentry);
+        }
+        Navigation.NavigateTo("/entries", forceLoad: true);
+    }
+}
+}

@@ -1,6 +1,5 @@
 ﻿using static System.Environment;
-
-namespace Bala.Shared;
+namespace Bala.DataContext.Sqlite;
 
 public class JournalContextLogger
 {
@@ -8,7 +7,7 @@ public class JournalContextLogger
     {
         string dateTimeStamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
 
-        string path = Path.Combine("..", $"BalaLog-{dateTimeStamp}.txt");
+        string path = Path.Combine("..", "logs", $"BalaLog-{dateTimeStamp}.txt");
         path = Path.GetFullPath(path);
         StreamWriter textFile = File.AppendText(path);
         textFile.WriteLine(message);
