@@ -1,14 +1,5 @@
-﻿@page "/entries"
-@inject IJournalService _journalService
-
-@code {
-    public IEnumerable<JournalEntry>? JournalEntries { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        JournalEntries = await _journalService.GetJournalEntriesAsync();
-    }
-}
+﻿@page
+@model Bala.Web.Pages.EntriesModel
 
 <div class="row">
     <h1 class="display-2">Journal Entries</h1>
@@ -21,16 +12,16 @@
             </tr>
         </thead>
         <tbody>
-            @if (JournalEntries is not null)
+            @if (Model.Entries is not null)
             {
-                @foreach (var entry in JournalEntries)
+                @foreach (var entry in Model.Entries)
                 {
                     <tr>
                         <td>@entry.Date</td>
                         <td>@entry.Rating</td>
                         <td>@entry.Comment</td>
                         <td>
-                            <a class="btn btn-primary" href="editentry/@entry.Id.ToString()">Edit</a>
+                            <a class="btn btn-primary" asp-page="Edit" asp-route-id="@entry.Id">Edit</a>
                             <button class="btn btn-danger">Delete</button>
                         </td>
                     </tr>

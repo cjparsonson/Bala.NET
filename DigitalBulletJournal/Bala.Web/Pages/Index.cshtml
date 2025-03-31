@@ -1,13 +1,16 @@
-﻿@page "/"
-<PageTitle>Welcome to Bala.NET</PageTitle>
+﻿@page
+@using Bala.Web.Pages
+@model IndexModel
+
 <div class="container">
     <div class="jumbotron">
         <h1 class="display-3">Welcome to Bala.NET</h1>
         <p class="lead">The online bullet journal built on ASP.NET</p>
+        <p>Today is @Model.DayName</p>
         <hr />
         <p>
             <a class="btn btn-primary"
-                href="https://www.asp.net/">Learn More</a>
+               href="https://www.asp.net/">Learn More</a>
         </p>
     </div>
 </div>

@@ -1,10 +1,9 @@
-using Bala.Web.Components;
 using Bala.DataContext.Sqlite;
 using Bala.Services;
 
 #region Configue the web server host and services
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddRazorComponents();
+builder.Services.AddRazorPages();
 builder.Services.AddJournalDbContext();
 // Register the JournalService with its interface
 builder.Services.AddScoped<IJournalService, JournalService>();
@@ -16,9 +15,13 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseHsts();
 }
+
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
 app.UseAntiforgery();
-app.MapRazorComponents<App>();
+app.UseDefaultFiles();
+app.MapRazorPages();
 app.MapGet("/env", () => 
     $"Environment is {app.Environment.EnvironmentName}");
 #endregion
