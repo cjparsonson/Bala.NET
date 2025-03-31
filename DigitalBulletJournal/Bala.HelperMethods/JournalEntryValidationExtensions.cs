@@ -1,4 +1,6 @@
-﻿namespace Bala.Shared
+﻿using Bala.EntityModels.Sqlite;
+
+namespace Bala.Shared
 {
     public static class JournalEntryValidationExtensions
     {
