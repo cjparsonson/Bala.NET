@@ -7,8 +7,8 @@ namespace Bala.Services
     {
         Task<List<JournalEntry>> GetJournalEntriesAsync();
         Task<JournalEntry?> GetJournalEntryByIdAsync(int id);
-        Task AddJournalEntryAsync(JournalEntry entry);
-        Task EditJournalEntryAsync(JournalEntry entry);
-        Task DeleteJournalEntryAsync(JournalEntry entry);
+        Task<JournalEntry> AddJournalEntryAsync(JournalEntry entry);
+        Task<JournalEntry> EditJournalEntryAsync(JournalEntry entry);
+        Task DeleteJournalEntryAsync(int id);
     }
 }
