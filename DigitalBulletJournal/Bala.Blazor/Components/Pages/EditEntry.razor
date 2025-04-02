@@ -1,0 +1,25 @@
+﻿@rendermode RenderMode.InteractiveServer
+@page "/editentry/{id:int}"
+@inject IJournalService _service
+@inject NavigationManager _navigationManager
+
+<h3>Edit Entry</h3>
+<EntryDetail Entry="@Entry" ButtonText="Update" OnValidSubmit="@Update" />
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    private JournalEntry? Entry = new();
+    protected override async Task OnParametersSetAsync()
+    {
+        Entry = await _service.GetJournalEntryByIdAsync(Id);
+    }
+    private async Task Update()
+    {
+        if (Entry is not null)
+        {
+            await _service.EditJournalEntryAsync(Entry);
+        }
+        _navigationManager.NavigateTo("entries");
+    }
+}

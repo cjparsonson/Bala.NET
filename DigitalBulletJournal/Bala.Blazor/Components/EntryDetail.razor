@@ -1,0 +1,35 @@
+﻿<EditForm Model="@Entry" OnValidSubmit="@OnValidSubmit" FormName="EditDetailForm">
+    <DataAnnotationsValidator />
+    <div>
+        <label class="form-label">Date</label>
+        <div>
+            <InputDate @bind-Value="@Entry.Date" class="form-control" />
+            <ValidationMessage For="@(() => Entry.Date)" />
+        </div>
+        <label class="form-label">Rating</label>
+        <div>
+            <InputNumber @bind-Value="@Entry.Rating" class="form-control" />
+            <ValidationMessage For="@(() => Entry.Rating)" />
+        </div>
+        <label class="form-label">Comment</label>
+        <div>
+            <InputText @bind-Value="@Entry.Comment" class="form-control" />
+            <ValidationMessage For="@(() => Entry.Comment)" />
+        </div>
+    </div>
+    <div class="btn">
+        <button type="submit" class="btn @ButtonStyle">@ButtonText</button>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public JournalEntry Entry { get; set; } = null!;
+    [Parameter]
+    public string ButtonText { get; set; } = "Save";
+    [Parameter]
+    public string ButtonStyle { get; set; } = "btn-primary";
+    [Parameter]
+    public EventCallback OnValidSubmit { get; set; }
+}
+

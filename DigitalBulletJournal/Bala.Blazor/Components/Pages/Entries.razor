@@ -21,7 +21,7 @@ else
             @foreach (var entry in entries)
             {
                 <tr>
-                    <td>@entry.Date</td>
+                    <td>@entry.Date.ToShortDateString()</td>
                     <td>@entry.Rating</td>
                     <td>@entry.Comment</td>
                     <td>

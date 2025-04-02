@@ -1,0 +1,16 @@
+﻿@rendermode RenderMode.InteractiveServer
+@page "/createentry"
+@inject IJournalService _service
+@inject NavigationManager _navigationManager
+
+<h3>Create Entry</h3>
+<EntryDetail Entry="@Entry" ButtonText="Create" OnValidSubmit="@Create" />
+
+@code {
+    private JournalEntry Entry = new();
+    private async Task Create()
+    {
+        await _service.AddJournalEntryAsync(Entry);
+        _navigationManager.NavigateTo("entries");
+    }
+}

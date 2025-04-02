@@ -1,0 +1,31 @@
+﻿@rendermode RenderMode.InteractiveServer
+@page "/deleteentry/{id:int}"
+@inject IJournalService _service
+@inject NavigationManager _navigationManager
+
+<h3>Delete Entry</h3>
+<div class="alert alert-danger">
+    Warning! This action cannot be undone.
+</div>
+
+<EntryDetail Entry="@Entry" ButtonText="Delete"
+             @ButtonStyle="btn-danger" OnValidSubmit="@Delete" />
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    private JournalEntry? Entry = new();
+    protected override async Task OnParametersSetAsync()
+    {
+        Entry = await _service.GetJournalEntryByIdAsync(Id);
+    }
+    private async Task Delete()
+    {
+        if (Entry is not null)
+        {
+            await _service.DeleteJournalEntryAsync(Entry.Id);
+        }
+        _navigationManager.NavigateTo("entries");
+    }
+
+}
