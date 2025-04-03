@@ -17,6 +17,6 @@ public class JournalEntry
     public string? Comment { get; set; } = string.Empty; // Default value
 
     [Required]
-    [Range(1, 5, ErrorMessage = "Rating is Required.")]
+    [Range(1, 5, ErrorMessage = "Rating Between 1 and 5 is Required.")]
     public int? Rating { get; set; } = 3; // Default value
 }
